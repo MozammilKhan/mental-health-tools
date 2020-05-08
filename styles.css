@@ -1,0 +1,26 @@
+.page-title {
+    padding-left: 5%;
+    padding-top: 2%;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1%;
+    /* border: 10px solid red; */
+    padding: 1% 5% 0 5%;
+}
+
+textarea {
+    width: 90%;
+    font-size: 1.3em;
+}
+
+.description {
+    height: 40px;
+}
+
+.form {
+    padding-top: 70px;
+    padding-left: 5%;
+}
