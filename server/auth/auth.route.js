@@ -9,24 +9,13 @@ const router = express.Router(); // eslint-disable-line new-cap
 
 /** /api/auth/login */
 router.route('/login')
-    .get((req, res) => {
-            res.render('login.ejs')
-        }
-    )
-
-    .post(passport.authenticate('local', {
-        successRedirect: '/api/health-check',
-        failureRedirect: '/api/auth/login',
-        failureFlash: true
-    }));
-
+    .post( passport.authenticate('local'),
+        function(req, res) {
+            res.send(req.user);
+        });
 
 /** /api/auth/register  */
 router.route('/register')
-    .get((req, res) => {
-            res.render('register.ejs')
-        }
-    )
     .post(authCtrl.create);
 
 /** /api/auth/logout  */
@@ -35,8 +24,6 @@ router.route('/logout')
         req.logOut();
         res.redirect('/api/auth/login')
       });
-
-
 
 module.exports = router;
 

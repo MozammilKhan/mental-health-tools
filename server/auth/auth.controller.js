@@ -15,7 +15,6 @@ async function create(req, res, next) {
             [req.body.user_id, hashedPassword, req.body.email, req.body.last_name, req.body.first_name]
         );
         console.log(result.rows[0]);
-        res.redirect('/api/auth/login');
         return next()
     } catch (err) {
         res.redirect('/api/auth/register');
@@ -40,4 +39,4 @@ function checkNotAuthenticated(req, res, next) {
 }
 
 
-module.exports = {login, create, checkAuthenticated, checkNotAuthenticated};
+module.exports = {create, checkAuthenticated, checkNotAuthenticated};
