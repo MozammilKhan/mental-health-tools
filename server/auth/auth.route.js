@@ -1,15 +1,12 @@
 const express = require('express');
-const { check, validationResult } = require('express-validator');
 const authCtrl = require('./auth.controller');
 const passport = require('passport');
-const bcrypt = require('bcrypt');
-
 
 const router = express.Router(); // eslint-disable-line new-cap
 
 /** /api/auth/login */
 router.route('/login')
-    .post( passport.authenticate('local'),
+    .post(passport.authenticate('local'),
         function(req, res) {
             res.send(req.user);
         });

@@ -1,7 +1,7 @@
 {
   "name": "activitytracker",
   "version": "1.0.0",
-  "description": "",
+  "description": "backend for implementing common self-activation methods suggested by psychiatrists",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",

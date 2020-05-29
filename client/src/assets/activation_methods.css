@@ -1,0 +1,20 @@
+.methods-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+    padding: 0 5% 0 5%;
+}
+
+.method {
+    border: 5px solid red;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.method-header{
+    border: 5px solid green;
+}
+
+.methods-title{
+    padding: 0 5% 0 5%;
+}

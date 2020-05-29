@@ -1,27 +1,34 @@
-.title {
-    padding: 2% 5% 0 5%;
-    margin:0;
+.activity-container {
+    display: flex;
+    justify-content: space-around;
 }
 
-.container {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 15px;
-    padding: 2% 5% 0 5%;
+.item{
+    text-align: left;
+    width: 14%;
+    height: 200px;
 }
 
-.time{
-    height: 85px;
+.activity-title{
+    font-size: 36px;
+    text-align: center;
 }
 
-.plan {
-    grid-column-start: 2;
+textarea {
+    border: 3px solid #cccccc;
+    width: 97%;
+    font-size: 1.3em;
+    background-image:none;
+    background:none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    resize: none;
 }
 
-.before {
-    grid-column-start: 2;
+.act-button{
+    margin: 30px;
+    position: absolute;
+    left: 92%;
 }
 
-.item {
-    border: 5px solid red;
-}

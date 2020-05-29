@@ -1,11 +1,16 @@
 import React from 'react';
 import axios from 'axios';
+import { useHistory } from "react-router-dom";
+
 import "../assets/login.css"
+import { setSessionCookie } from "../session";
+
 
 function Login() {
     const [userName, setuserName] = React.useState("");
     const [userPassword, setUserPassword] = React.useState("");
     const [loading, setLoading] = React.useState(false);
+    const history = useHistory();
 
 
     function handleEmailChange(e) {
@@ -19,15 +24,17 @@ function Login() {
 
     const authHandler = async () => {
         setLoading(true);
-        axios.post('api/auth/login', {
+        axios.post('auth/login', {
             user_id: userName,
             password: userPassword
           })
           .then((response) => {
             if (response.status === 200){
                 setLoading(false);
-                console.log(response.data);
-
+                const user = response.data.user_id;
+                console.log(user)
+                setSessionCookie({ user });
+                history.push("/methods");
             }
             else{
                 throw Error(response.error);
@@ -41,7 +48,8 @@ function Login() {
           });
     };
 
-    return (<div>
+    return (
+    <div>
         <div className="imgContainer">
             <div className="blueBg"></div>
         </div>

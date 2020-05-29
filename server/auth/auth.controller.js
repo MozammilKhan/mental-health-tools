@@ -1,12 +1,7 @@
 const db = require('../../db');
 const bcrypt = require('bcrypt');
 
-/**
- * Create new user
- * @property {string} req.body.username - The username of user.
- * @property {string} req.body.mobileNumber - The mobileNumber of user.
- * @returns {User}
- */
+
 async function create(req, res, next) {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -22,21 +17,4 @@ async function create(req, res, next) {
     }
 }
 
-function checkAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-        // res.render('index.ejs', { name: req.user.user_id });
-        return next()
-    }
-
-    res.redirect('login')
-}
-
-function checkNotAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-        return res.redirect('/')
-    }
-    next()
-}
-
-
-module.exports = {create, checkAuthenticated, checkNotAuthenticated};
+module.exports = {create};
