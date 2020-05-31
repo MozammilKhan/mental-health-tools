@@ -2,7 +2,7 @@ const express = require('express');
 const logger = require('morgan');
 const cors = require('cors');
 // const flash = require('express-flash');
-// const session = require('express-session');
+const session = require('express-session');
 const methodOverride = require('method-override');
 
 const bodyParser = require('body-parser');
@@ -19,7 +19,7 @@ if (config.env === 'development') {
     app.use(logger('dev'));
 }
 
-app.set('view-engine', 'ejs');
+app.use(session({ secret: "secret-key", resave: false,  saveUninitialized: false}));
 app.use(express.urlencoded({ extended: false }));
 
 app.use(passport.initialize());

@@ -6,6 +6,8 @@ import {SessionContext} from '../session'
 
 function Activitytracker() {
 
+
+
     const [time, checkTime] = React.useState("");
     const [earlyMorning, setEarlyMorning] = React.useState("");
     const [lateMorning, setLateMorning] = React.useState("");
@@ -15,6 +17,9 @@ function Activitytracker() {
     const [night, setNight] = React.useState("");
 
     const session = useContext(SessionContext);
+
+    const curDate = new Date().toJSON().slice(0, 10);
+
 
     function handleEarlyMorning(e) {
         setEarlyMorning(e.target.value);
@@ -42,7 +47,7 @@ function Activitytracker() {
 
     React.useEffect(() => {
         // Make a request for a user with a given ID
-        axios.get(`/activitytracker/check/${session.user}`)
+        axios.get(`/activitytracker/loadday/${curDate}`)
             .then(function (response) {
                 // handle success
                 checkTime(response.data);
@@ -58,9 +63,21 @@ function Activitytracker() {
     }, []);
 
     const dataHandler = async () => {
-        const curDate = new Date().toJSON().slice(0, 10);
-        axios.post(`/activitytracker/${session.user}/${curDate}`)
-    }
+        axios.post(`/activitytracker/handledata/${curDate}`, {
+            early_morning: earlyMorning,
+            late_morning: lateMorning,
+            early_afternoon: earlyAfternoon,
+            late_afternoon: lateAfternoon,
+            evening: evening,
+            night: night
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    };
 
     function StartOfDay() {
         return (

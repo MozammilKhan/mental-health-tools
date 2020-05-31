@@ -4,14 +4,16 @@ const actCtrl = require('./activity_tracker.controller');
 const router = express.Router();
 
 
-router.route('/handledata/:userId')
+router.route('/handledata/:date')
     .post(actCtrl.addday)
     .put(actCtrl.changeday);
 
-router.route('/:userId/:date')
+router.route('/loadday/:date')
     .get(actCtrl.loadday);
 
-router.param('userId', actCtrl.loaduser);
+
+router.route('/loaddata')
+    .get(actCtrl.loaddata);
 
 
 
