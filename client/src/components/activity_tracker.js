@@ -5,9 +5,6 @@ import '../assets/activity_tracker.css'
 import {SessionContext} from '../session'
 
 function Activitytracker() {
-
-
-
     const [time, checkTime] = React.useState("");
     const [earlyMorning, setEarlyMorning] = React.useState("");
     const [lateMorning, setLateMorning] = React.useState("");
@@ -17,15 +14,13 @@ function Activitytracker() {
     const [night, setNight] = React.useState("");
 
     const session = useContext(SessionContext);
-
     const curDate = new Date().toJSON().slice(0, 10);
-
 
     function handleEarlyMorning(e) {
         setEarlyMorning(e.target.value);
     }
 
-    function handleEmailChange(e) {
+    function handleLateMorning(e) {
         setLateMorning(e.target.value);
     }
 
@@ -79,50 +74,8 @@ function Activitytracker() {
             });
     };
 
-    function StartOfDay() {
-        return (
-            <div>
-                <p className="activity-title">Today’s Plan</p>
-                <div className="activity-container">
-                    <div className="item">
-                        <p>Early Morning (Wakeup to 10 A.M.)</p>
-                        <textarea rows="7" form="usrform" onChange={handleEarlyMorning}/>
-                    </div>
-                    <div className="item">
-                        <p>Late Morning (10 A.M.- noon)</p>
-                        <textarea rows="7" form="usrform" onChange={handleEmailChange}/>
-                    </div>
-                    <div className="item">
-                        <p>Early Afternoon (Noon -3 p.m)</p>
-                        <textarea rows="7" form="usrform" onChange={handleEarlyAfternoon}/>
-                    </div>
-                    <div className="item">
-                        <p>Late Afternoon (3-5 P.M.)</p>
-                        <textarea rows="7" form="usrform" onChange={handleLateAfternoon}/>
-                    </div>
-                    <div className="item">
-                        <p>Evening (5-8 P.M.)</p>
-                        <textarea rows="7" form="usrform" onChange={handleEvening}/>
-                    </div>
-                    <div className="item">
-                        <p>Night (8 P.M. until bedtime)</p>
-                        <textarea rows="7" form="usrform" onChange={handleNight}/>
-                    </div>
-                </div>
-                <div className="form">
-                    <form action="http://jkorpela.fi/cgi-bin/echo.cgi" id="usrform">
-                        <button className="act-button" type="button">Click Me!</button>
 
-                    </form>
-                </div>
-                <div className="data">
-                    some data
-                </div>
-            </div>
-        )
-    }
-
-    function EndOfDay() {
+    if (time !== "None") {
         return (
             <div>
                 <p className="activity-title">Today’s Plan</p>
@@ -163,13 +116,49 @@ function Activitytracker() {
                 </div>
             </div>
         )
+    } else{
+        return (
+            <div>
+                <p className="activity-title">Today’s Plan</p>
+                <div className="activity-container">
+                    <div className="item">
+                        <p>Early Morning (Wakeup to 10 A.M.)</p>
+                        <textarea rows="7" form="usrform" value={earlyMorning} onChange={handleEarlyMorning} />
+                    </div>
+                    <div className="item">
+                        <p>Late Morning (10 A.M.- noon)</p>
+                        <textarea rows="7" form="usrform" value={lateMorning} onChange={handleLateMorning}/>
+                    </div>
+                    <div className="item">
+                        <p>Early Afternoon (Noon -3 p.m)</p>
+                        <textarea rows="7" form="usrform" value={earlyAfternoon} onChange={handleEarlyAfternoon}/>
+                    </div>
+                    <div className="item">
+                        <p>Late Afternoon (3-5 P.M.)</p>
+                        <textarea rows="7" form="usrform" value={lateAfternoon} onChange={handleLateAfternoon}/>
+                    </div>
+                    <div className="item">
+                        <p>Evening (5-8 P.M.)</p>
+                        <textarea rows="7" form="usrform" value={evening} onChange={handleEvening}/>
+                    </div>
+                    <div className="item">
+                        <p>Night (8 P.M. until bedtime)</p>
+                        <textarea rows="7" form="usrform" value={night} onChange={handleNight}/>
+                    </div>
+                </div>
+                <div className="form">
+                    <form action="http://jkorpela.fi/cgi-bin/echo.cgi" id="usrform">
+                        <button className="act-button" type="button" onClick={dataHandler}>Click Me!</button>
+
+                    </form>
+                </div>
+                <div className="data">
+                    some data
+                </div>
+            </div>
+        )
     }
 
-    if (time !== "None") {
-        return <EndOfDay/>;
-    }
-
-    return <StartOfDay/>
 }
 
 export default Activitytracker;
